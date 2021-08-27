@@ -62,7 +62,7 @@ func main() {
 		log.Panicf("Unable to setTag: '%s'", err)
 	}
 
-	// @TODO: wrap into `docker-image`
+	// @TODO: get rid of log-statements (make them debug)
 
 	// @TODO: push tags using `repository.PushTags()`
 	// @TODO: fetch tags using `repository.FetchTags()`
