@@ -11,7 +11,7 @@ docker run \
     --volume="${PWD}":/home \
     --workdir=/home \
     iakunin/git-semver:latest \
-    /main \
+    /git-semver \
     --prefix=myPrefix \
     --suffix=myAwesomeSuffix
 ```
