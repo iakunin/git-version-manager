@@ -18,12 +18,17 @@ func main() {
 	repoDir := flag.String("repoDir", workDir, "git-repo directory (current workDir by default)")
 	prefix := flag.String("prefix", "", "tag prefix")
 	suffix := flag.String("suffix", "", "tag suffix")
+	isVerbose := flag.Bool("verbose", false, "enable verbose logging")
 	bumpStrategy := flag.String(
 		"bumpStrategy",
 		string(tagModel.Patch),
 		"available values: `patch`, `minor`, `major`",
 	)
 	flag.Parse()
+
+	if *isVerbose {
+		log.SetLevel(log.TraceLevel)
+	}
 
 	repository, err := repositoryModel.Open(*repoDir)
 	if err != nil {
@@ -34,8 +39,9 @@ func main() {
 	if err != nil {
 		log.Panicf("Unable to getRawTags: '%s'", err)
 	}
+
 	for _, t := range rawTags {
-		log.Infof("This is a rawTag: '%s'", *t)
+		log.Debugf("This is a rawTag: '%s'", *t)
 	}
 
 	tags, err := createTags(rawTags, *prefix, *suffix)
@@ -43,7 +49,7 @@ func main() {
 		log.Panicf("Unable to createTags: '%s'", err)
 	}
 	for _, t := range tags {
-		log.Infof("This is a tag (before bump): '%s'\n", t.String())
+		log.Debugf("This is a tag (before bump): '%s'\n", t.String())
 	}
 
 	maxTag, _ := findMaxTag(tags)
@@ -54,15 +60,13 @@ func main() {
 	log.Infof("This is a BUMPED tag: '%s'\n", maxTag.String())
 
 	for _, t := range tags {
-		log.Infof("This is a tag (after bump): '%s'\n", t.String())
+		log.Debugf("This is a tag (after bump): '%s'\n", t.String())
 	}
 
 	err = repository.SetTag(maxTag.String())
 	if err != nil {
 		log.Panicf("Unable to setTag: '%s'", err)
 	}
-
-	// @TODO: get rid of log-statements (make them debug)
 
 	// @TODO: push tags using `repository.PushTags()`
 	// @TODO: fetch tags using `repository.FetchTags()`
@@ -74,7 +78,7 @@ func createTags(rawTags []*string, prefix string, suffix string) ([]*tagModel.Ta
 	for i := range rawTags {
 		t, err := tagModel.New(*rawTags[i], prefix, suffix)
 		if err != nil {
-			log.Infof("skipping tag '%s'", *rawTags[i])
+			log.Debugf("skipping tag '%s'", *rawTags[i])
 			continue
 		}
 

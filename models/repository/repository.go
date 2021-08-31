@@ -42,7 +42,11 @@ func (r *Repository) GetRawTags() ([]*string, error) {
 		name := t.Name().String()
 
 		if !strings.HasPrefix(name, tagPrefix) {
-			errMessage := fmt.Sprintf("tag must starts with predefined preffix (%s): %s", tagPrefix, name)
+			errMessage := fmt.Sprintf(
+				"tag must start with predefined preffix (%s); got '%s'",
+				tagPrefix,
+				name,
+			)
 			log.Error(errMessage)
 			return errors.New(errMessage)
 		}
@@ -85,10 +89,10 @@ func (r *Repository) tagExists(tag string) bool {
 func (r *Repository) SetTag(tag string) error {
 	if r.tagExists(tag) {
 		err := fmt.Sprintf("tag %s already exists", tag)
-		log.Infof(err)
+		log.Errorf(err)
 		return errors.New(err)
 	}
-	log.Infof("Set tag %s", tag)
+	log.Infof("Tag '%s' was successfully created", tag)
 	h, err := r.repo.Head()
 	if err != nil {
 		log.Errorf("get HEAD error: %s", err)
