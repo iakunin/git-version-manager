@@ -20,6 +20,8 @@ docker-build:
 	.
 
 docker-push:
-	docker push --all-tags iakunin/git-semver
+	VERSION=$$(git tag -l --sort=v:refname | tail -n 1); \
+	docker push iakunin/git-semver:$$VERSION && \
+	docker push iakunin/git-semver:latest
 
 deploy: tag docker-build docker-push

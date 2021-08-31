@@ -78,7 +78,7 @@ func createTags(rawTags []*string, prefix string, suffix string) ([]*tagModel.Ta
 	for i := range rawTags {
 		t, err := tagModel.New(*rawTags[i], prefix, suffix)
 		if err != nil {
-			log.Debugf("skipping tag '%s'", *rawTags[i])
+			log.Debugf("skipping a tag '%s'", *rawTags[i])
 			continue
 		}
 
