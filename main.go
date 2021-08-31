@@ -65,7 +65,7 @@ func main() {
 
 	err = repository.SetTag(maxTag.String())
 	if err != nil {
-		log.Panicf("Unable to setTag: '%s'", err)
+		log.Panicf("Unable to set tag: '%s'", err)
 	}
 
 	// @TODO: push tags using `repository.PushTags()`
