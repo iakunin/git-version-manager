@@ -1,7 +1,5 @@
 # git-semver
 
-See https://github.com/edgexfoundry/git-semver for the source of inspiration.
-
 ## Running
 ```shell
 docker run \
@@ -10,7 +8,7 @@ docker run \
     --rm \
     --volume="${PWD}":/home \
     --workdir=/home \
-    iakunin/git-semver:latest \
+    iakunin/git-semver:0.0.4 \
     /git-semver \
     --prefix=myPrefix \
     --suffix=myAwesomeSuffix
