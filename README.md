@@ -8,8 +8,8 @@ docker run \
     --rm \
     --volume="${PWD}":/home \
     --workdir=/home \
-    iakunin/git-semver:0.0.4 \
-    /git-semver \
+    iakunin/git-version-manager:0.0.4 \
+    /git-version-manager \
     --prefix=myPrefix \
     --suffix=myAwesomeSuffix
 ```

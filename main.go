@@ -3,8 +3,8 @@ package main
 import (
 	"errors"
 	"flag"
-	repositoryModel "github.com/iakunin/git-semver/models/repository"
-	tagModel "github.com/iakunin/git-semver/models/tag"
+	repositoryModel "github.com/iakunin/git-version-manager/models/repository"
+	tagModel "github.com/iakunin/git-version-manager/models/tag"
 	log "github.com/sirupsen/logrus"
 	"os"
 )

@@ -1,4 +1,4 @@
-module github.com/iakunin/git-semver
+module github.com/iakunin/git-version-manager
 
 go 1.16
 

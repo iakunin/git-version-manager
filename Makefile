@@ -8,20 +8,19 @@ tag:
 	--rm \
 	--volume="${PWD}":/home \
 	--workdir=/home \
-	iakunin/git-semver:0.0.1 \
-	/git-semver && \
+	iakunin/git-version-manager:0.0.4 && \
 	git push --tags
 
 docker-build:
 	VERSION=$$(git tag -l --sort=v:refname | tail -n 1); \
 	docker build \
-	--tag=iakunin/git-semver:$$VERSION \
-	--tag=iakunin/git-semver:latest \
+	--tag=iakunin/git-version-manager:$$VERSION \
+	--tag=iakunin/git-version-manager:latest \
 	.
 
 docker-push:
 	VERSION=$$(git tag -l --sort=v:refname | tail -n 1); \
-	docker push iakunin/git-semver:$$VERSION && \
-	docker push iakunin/git-semver:latest
+	docker push iakunin/git-version-manager:$$VERSION && \
+	docker push iakunin/git-version-manager:latest
 
 deploy: tag docker-build docker-push
