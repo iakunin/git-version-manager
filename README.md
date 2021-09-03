@@ -8,7 +8,7 @@ docker run \
     --rm \
     --volume="${PWD}":/home \
     --workdir=/home \
-    iakunin/git-version-manager:0.0.4 \
+    iakunin/git-version-manager:0.0.6 \
     /git-version-manager \
     --prefix=myPrefix \
     --suffix=myAwesomeSuffix
