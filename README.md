@@ -1,4 +1,4 @@
-# git-semver
+# git-version-manager
 
 ## Running
 ```shell
