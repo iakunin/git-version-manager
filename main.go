@@ -24,6 +24,11 @@ func main() {
 		string(tagModel.Patch),
 		"available values: `patch`, `minor`, `major`",
 	)
+	successfulMessage := flag.String(
+		"successfulMessage",
+		"",
+		"message which will be written to console in the case of successful tagging",
+	)
 	flag.Parse()
 
 	if *isVerbose {
@@ -70,6 +75,10 @@ func main() {
 
 	// @TODO: push tags using `repository.PushTags()`
 	// @TODO: fetch tags using `repository.FetchTags()`
+
+	if *successfulMessage != "" {
+		log.Infoln(*successfulMessage)
+	}
 }
 
 func createTags(rawTags []*string, prefix string, suffix string) ([]*tagModel.Tag, error) {
